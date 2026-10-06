@@ -33,4 +33,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "fk_category")
     private Category category;
+
+    @Column(name = "fk_restaurant")
+    private Long restaurant;
 }

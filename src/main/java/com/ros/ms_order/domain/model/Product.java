@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
 @Builder
@@ -34,6 +37,7 @@ public class Product {
     @JoinColumn(name = "fk_category")
     private Category category;
 
-    @Column(name = "fk_restaurant")
-    private Long restaurant;
+    @Builder.Default
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Variant> variants = new ArrayList<>();
 }

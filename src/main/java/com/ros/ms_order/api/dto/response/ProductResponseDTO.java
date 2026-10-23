@@ -1,23 +1,21 @@
 package com.ros.ms_order.api.dto.response;
 
-import com.ros.ms_order.domain.model.Variant;
+import com.ros.ms_order.domain.model.Product;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 public record ProductResponseDTO (
         Long id,
         String name,
         String description,
-        String varianteName,
-        BigDecimal price
+        List<VariantResponseDTO> variants
 ){
-    public static ProductResponseDTO from(Variant variant) {
+    public static ProductResponseDTO from(Product product) {
         return new ProductResponseDTO(
-                variant.getId(),
-                variant.getProduct().getName(),
-                variant.getProduct().getDescription(),
-                variant.getName(),
-                variant.getPrice()
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+                product.getVariants().stream().map(VariantResponseDTO::from).toList()
         );
     }
 }

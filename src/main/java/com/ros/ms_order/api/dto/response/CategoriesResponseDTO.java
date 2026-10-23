@@ -11,17 +11,11 @@ public record CategoriesResponseDTO(
         List<ProductResponseDTO> products
 ) {
     public static CategoriesResponseDTO from(Category category) {
-        List<ProductResponseDTO> products = category.getProducts()
-                .stream()
-                .flatMap(product -> product.getVariants().stream())
-                .map(ProductResponseDTO::from)
-                .toList();
-
         return new CategoriesResponseDTO(
                 category.getId(),
                 category.getName(),
                 category.getDescription(),
-                products
+                category.getProducts().stream().map(ProductResponseDTO::from).toList()
         );
     }
 }

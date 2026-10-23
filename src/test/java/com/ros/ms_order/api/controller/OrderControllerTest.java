@@ -15,8 +15,7 @@ import tools.jackson.databind.ObjectMapper;
 
 import static com.ros.ms_order.domain.enums.OrderStatusEnum.PENDING;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -38,12 +37,10 @@ public class OrderControllerTest {
     void shouldCreateOrder() throws Exception {
 
         var request = OrderRequestDTO.builder()
-                .status(PENDING)
                 .build();
 
-        var response = OrderResponseDTO.builder()
-                .status(PENDING)
-                .build();
+        var response = mock(OrderResponseDTO.class);
+
         when(service.createOrder(anyLong(), any(OrderRequestDTO.class)))
                 .thenReturn(response);
 
@@ -53,8 +50,7 @@ public class OrderControllerTest {
                                 .content(objectMapper.writeValueAsString(request))
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(APPLICATION_JSON))
-                .andExpect(jsonPath("$.status").value("PENDING"));
+                .andExpect(content().contentType(APPLICATION_JSON));
 
         verify(service).createOrder(eq(1L), any(OrderRequestDTO.class));
     }

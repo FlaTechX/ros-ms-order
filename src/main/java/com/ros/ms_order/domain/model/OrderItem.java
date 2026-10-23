@@ -26,14 +26,6 @@ public class OrderItem {
     @JoinColumn(name = "fk_order", nullable = false)
     private Order order;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_product", nullable = false)
-    private Product product;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_product_variant")
-    private Variant productVariant;
-
     @Column(name = "nm_product", nullable = false, length = 150)
     private String productName;
 

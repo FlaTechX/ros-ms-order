@@ -28,6 +28,7 @@ public class Variant {
     @Column(name = "nr_price", precision = 10, scale = 2)
     private BigDecimal price;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "tp_status")
     private StatusEnum status;
 

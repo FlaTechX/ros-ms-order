@@ -8,6 +8,7 @@ public record ProductResponseDTO (
         Long id,
         String name,
         String description,
+        Long imageId,
         List<VariantResponseDTO> variants
 ){
     public static ProductResponseDTO from(Product product) {
@@ -15,6 +16,7 @@ public record ProductResponseDTO (
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
+                product.getImageId(),
                 product.getVariants().stream().map(VariantResponseDTO::from).toList()
         );
     }

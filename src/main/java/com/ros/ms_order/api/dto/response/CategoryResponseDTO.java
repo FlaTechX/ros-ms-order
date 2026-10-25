@@ -4,14 +4,14 @@ import com.ros.ms_order.domain.model.Category;
 
 import java.util.List;
 
-public record CategoriesResponseDTO(
+public record CategoryResponseDTO(
         Long id,
         String name,
         String description,
         List<ProductResponseDTO> products
 ) {
-    public static CategoriesResponseDTO from(Category category) {
-        return new CategoriesResponseDTO(
+    public static CategoryResponseDTO from(Category category) {
+        return new CategoryResponseDTO(
                 category.getId(),
                 category.getName(),
                 category.getDescription(),

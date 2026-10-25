@@ -1,6 +1,6 @@
 package com.ros.ms_order.domain.service.impl;
 
-import com.ros.ms_order.api.dto.response.CategoriesResponseDTO;
+import com.ros.ms_order.api.dto.response.CategoryResponseDTO;
 import com.ros.ms_order.domain.repository.CategoryRepository;
 import com.ros.ms_order.domain.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +14,10 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository repository;
 
     @Override
-    public List<CategoriesResponseDTO> getCategoriesByRestaurant(Long restaurantId) {
+    public List<CategoryResponseDTO> getCategoriesByRestaurant(Long restaurantId) {
         return repository.findByRestaurant(restaurantId)
                 .stream()
-                .map(CategoriesResponseDTO::from)
+                .map(CategoryResponseDTO::from)
                 .toList();
     }
 }

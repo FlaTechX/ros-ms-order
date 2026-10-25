@@ -31,7 +31,7 @@ public class Product {
     private Integer order;
 
     @Column(name = "fk_image")
-    private Long image;
+    private Long imageId;
 
     @ManyToOne
     @JoinColumn(name = "fk_category")

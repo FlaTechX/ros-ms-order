@@ -1,6 +1,6 @@
 package com.ros.ms_order.api.controller;
 
-import com.ros.ms_order.api.dto.response.CategoriesResponseDTO;
+import com.ros.ms_order.api.dto.response.CategoryResponseDTO;
 import com.ros.ms_order.domain.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class CategoryController {
     private final CategoryService service;
 
     @GetMapping
-    public List<CategoriesResponseDTO> getProducts(){
+    public List<CategoryResponseDTO> getProducts(){
         return service.getCategoriesByRestaurant(1L);
     }
 }

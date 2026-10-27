@@ -6,18 +6,26 @@ import com.ros.ms_order.domain.model.Order;
 import com.ros.ms_order.domain.model.OrderItem;
 import com.ros.ms_order.domain.model.RestaurantTable;
 
+import java.time.LocalDateTime;
+
 import static com.ros.ms_order.domain.enums.OrderStatusEnum.CREATED;
 
 public class OrderConverter {
 
     public static Order toOrder(RestaurantTable table, OrderRequestDTO requestDTO) {
-        return Order.builder()
+        final var order = Order.builder()
                 .type(requestDTO.getType())
                 .amount(requestDTO.getAmount())
-                .items(requestDTO.getProducts().stream().map(OrderConverter::buildProduct).toList())
                 .status(CREATED)
+                .openAt(LocalDateTime.now())
                 .table(table)
                 .build();
+
+        requestDTO.getProducts().forEach(itemDTO ->
+                order.addItem(buildProduct(itemDTO))
+        );
+
+        return order;
     }
 
     private static OrderItem buildProduct(ProductItemDTO itemDTO) {
@@ -28,7 +36,6 @@ public class OrderConverter {
                 .quantity(itemDTO.quantity())
                 .unitPrice(itemDTO.unitPrice())
                 .totalPrice(itemDTO.totalPrice())
-                .status(itemDTO.status())
                 .build();
     }
 

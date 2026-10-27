@@ -43,8 +43,4 @@ public class OrderItem {
 
     @Column(name = "ds_notes", length = 500)
     private String notes;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tp_status", nullable = false, length = 30)
-    private OrderStatusEnum status;
 }

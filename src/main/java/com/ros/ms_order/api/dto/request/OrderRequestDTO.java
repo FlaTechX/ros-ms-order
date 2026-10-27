@@ -17,7 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderRequestDTO {
     private OrderTypeEnum type;
-    private OrderStatusEnum status;
     private BigDecimal amount;
     private List<ProductItemDTO> products;
     private Long tableId;
